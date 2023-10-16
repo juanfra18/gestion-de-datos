@@ -1,0 +1,44 @@
+USE GD2C2023
+GO
+
+-- BORRADO DE PROCEDURES/
+
+IF OBJECT_ID('GUISO_DE_LENTEJAS.MIGRAR_TABLA_BARRIO') IS NOT NULL
+BEGIN
+	DROP PROCEDURE GUISO_DE_LENTEJAS.MIGRAR_TABLA_BARRIO
+	PRINT('Procedure GUISO_DE_LENTEJAS.MIGRAR_TABLA_BARRIO eliminado')
+END
+
+/*TODO*/
+-----------------------------------------------------------------------------------------------------
+/*Borrado de FKS de las tablas si existen*/
+
+/*BORRO CONSTRAINS FK A LA TABLA BARRIO*/
+IF EXISTS (SELECT * 
+    		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
+               WHERE CONSTRAINT_NAME ='FK_BARRIO_LOCALIDAD')
+BEGIN
+	ALTER TABLE GUISO_DE_LENTEJAS.LOCALIDAD DROP CONSTRAINT FK_BARRIO_LOCALIDAD
+END
+GO
+/*TODO*/
+-----------------------------------------------------------------------------------------------------
+/*Borrado de tablas*/
+IF OBJECT_ID('GUISO_DE_LENTEJAS.BARRIO', 'U') IS NOT NULL
+BEGIN
+	DROP TABLE GUISO_DE_LENTEJAS.BARRIO
+	PRINT('Tabla GUISO_DE_LENTEJAS.BARRIO eliminada')
+END
+/*TODO*/
+-----------------------------------------------------------------------------------------------------
+/*BORRADO DE ESQUEMA*/
+
+IF EXISTS (SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'GUISO_DE_LENTEJAS')
+BEGIN
+   DROP SCHEMA GUISO_DE_LENTEJAS
+   PRINT('Esquema GUISO_DE_LENTEJAS borrado')
+END
+GO
+
+USE GD2C2023
+GO
