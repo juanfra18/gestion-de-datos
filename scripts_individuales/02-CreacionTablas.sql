@@ -238,7 +238,7 @@ BEGIN
         VENTA_PRECIO numeric(18,2) NOT NULL,
         VENTA_COMISION numeric(18,2) NOT NULL,
         VENTA_COMPRADOR numeric(18,0) NOT NULL,
-        VENTA_ANUNCIO numeric(18,0) NOT NULL,
+        VENTA_ANUNCIO numeric(19,0) NOT NULL,
         VENTA_MONEDA numeric(18,0) NOT NULL
 	)
 	PRINT('Tabla GUISO_DE_LENTEJAS.VENTA creada')
