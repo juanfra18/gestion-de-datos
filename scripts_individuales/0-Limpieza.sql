@@ -2,12 +2,13 @@ USE GD2C2023
 GO
 
 -- BORRADO DE PROCEDURES/
-
+/*
 IF OBJECT_ID('GUISO_DE_LENTEJAS.MIGRAR_TABLA_BARRIO') IS NOT NULL
 BEGIN
 	DROP PROCEDURE GUISO_DE_LENTEJAS.MIGRAR_TABLA_BARRIO
 	PRINT('Procedure GUISO_DE_LENTEJAS.MIGRAR_TABLA_BARRIO eliminado')
 END
+*/ 
 
 /*TODO*/
 -----------------------------------------------------------------------------------------------------
@@ -24,11 +25,20 @@ GO
 /*TODO*/
 -----------------------------------------------------------------------------------------------------
 /*Borrado de tablas*/
+
+IF OBJECT_ID('GUISO_DE_LENTEJAS.TIPO_INMUEBLE', 'U') IS NOT NULL
+BEGIN
+	DROP TABLE GUISO_DE_LENTEJAS.TIPO_INMUEBLE
+	PRINT('Tabla GUISO_DE_LENTEJAS.TIPO_INMUEBLE eliminada')
+END
+
+/*
 IF OBJECT_ID('GUISO_DE_LENTEJAS.BARRIO', 'U') IS NOT NULL
 BEGIN
 	DROP TABLE GUISO_DE_LENTEJAS.BARRIO
 	PRINT('Tabla GUISO_DE_LENTEJAS.BARRIO eliminada')
 END
+*/
 /*TODO*/
 -----------------------------------------------------------------------------------------------------
 /*BORRADO DE ESQUEMA*/
@@ -40,5 +50,3 @@ BEGIN
 END
 GO
 
-USE GD2C2023
-GO

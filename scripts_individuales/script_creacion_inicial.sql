@@ -2,12 +2,13 @@ USE GD2C2023
 GO
 
 -- BORRADO DE PROCEDURES/
-
+/*
 IF OBJECT_ID('GUISO_DE_LENTEJAS.MIGRAR_TABLA_BARRIO') IS NOT NULL
 BEGIN
 	DROP PROCEDURE GUISO_DE_LENTEJAS.MIGRAR_TABLA_BARRIO
 	PRINT('Procedure GUISO_DE_LENTEJAS.MIGRAR_TABLA_BARRIO eliminado')
 END
+*/ 
 
 /*TODO*/
 -----------------------------------------------------------------------------------------------------
@@ -24,11 +25,20 @@ GO
 /*TODO*/
 -----------------------------------------------------------------------------------------------------
 /*Borrado de tablas*/
+
+IF OBJECT_ID('GUISO_DE_LENTEJAS.TIPO_INMUEBLE', 'U') IS NOT NULL
+BEGIN
+	DROP TABLE GUISO_DE_LENTEJAS.TIPO_INMUEBLE
+	PRINT('Tabla GUISO_DE_LENTEJAS.TIPO_INMUEBLE eliminada')
+END
+
+/*
 IF OBJECT_ID('GUISO_DE_LENTEJAS.BARRIO', 'U') IS NOT NULL
 BEGIN
 	DROP TABLE GUISO_DE_LENTEJAS.BARRIO
 	PRINT('Tabla GUISO_DE_LENTEJAS.BARRIO eliminada')
 END
+*/
 /*TODO*/
 -----------------------------------------------------------------------------------------------------
 /*BORRADO DE ESQUEMA*/
@@ -40,8 +50,6 @@ BEGIN
 END
 GO
 
-USE GD2C2023
-GO
 USE GD2C2023
 GO
 ----------------------------------------------------------------------------------------------------------
@@ -57,6 +65,18 @@ GO
 ----------------------------------------------------------------------------------------------------------
 /*CREACION DE TABLAS*/
 
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id= OBJECT_ID(N'[GUISO_DE_LENTEJAS].TIPO_INMUEBLE') AND type = 'U')
+BEGIN
+	CREATE TABLE GUISO_DE_LENTEJAS.TIPO_INMUEBLE (
+		
+        TIPO_INMUEBLE_ID decimal(18,0) NOT NULL IDENTITY(1,1),
+        TIPO_INMUEBLE_DESCRIPCION nvarchar(100) NOT NULL,
+	)
+	PRINT('Tabla GUISO_DE_LENTEJAS.TIPO_INMUEBLE creada')
+END
+GO
+
+/*
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id= OBJECT_ID(N'[GUISO_DE_LENTEJAS].BARRIO') AND type = 'U')
 BEGIN
 	CREATE TABLE GUISO_DE_LENTEJAS.BARRIO (
@@ -68,13 +88,31 @@ BEGIN
 	PRINT('Tabla GUISO_DE_LENTEJAS.BARRIO creada')
 END
 GO
-
+*/
 /*TODO*/USE GD2C2023
 GO  
 ----------------------------------------------------------------------------------------------------------
 /*CREANDO CONSTRAINT PK PARA LAS TABLAS DE LA BASE DE DATOS*/
 
+/*AGREGANDO CONSTRAINT PK A LA TABLA TIPO_INMUEBLE*/
+
+IF NOT EXISTS (SELECT * 
+    		   FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
+               WHERE CONSTRAINT_NAME ='PK_TIPO_INMUEBLE')
+BEGIN
+	ALTER TABLE GUISO_DE_LENTEJAS.TIPO_INMUEBLE
+	ADD CONSTRAINT PK_TIPO_INMUEBLE PRIMARY KEY (TIPO_INMUEBLE_ID)
+	PRINT('Primary key de la tabla GUISO_DE_LENTEJAS.TIPO_INMUEBLE agregada')
+END
+GO
+
+
+
+
+
+
 /*AGREGANDO CONSTRAINT PK A LA TABLA BARRIO*/
+/*
 IF NOT EXISTS (SELECT * 
     		   FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
                WHERE CONSTRAINT_NAME ='PK_BARRIO')
@@ -84,4 +122,11 @@ BEGIN
 	PRINT('Primary key de la tabla GUISO_DE_LENTEJAS.LOCALIDAD agregada')
 END
 GO
+*/
+/*
+if not EXISTS (select * )
 
+BEGIN
+alter table GUISO_DE_LENTEJAS.BARRIO
+ADD CONSTRAINS FK_BARRIO_LOCALIDAD FOREIGN KEY(BARRIO_LOCALIDAD) REFE
+*/
