@@ -594,6 +594,12 @@ BEGIN
 	PRINT('Procedure GUISO_DE_LENTEJAS.MIGRAR_VENTA eliminado')
 END
 
+IF OBJECT_ID('GUISO_DE_LENTEJAS.MIGRAR_PAGO_VENTA') IS NOT NULL
+BEGIN
+	DROP PROCEDURE GUISO_DE_LENTEJAS.MIGRAR_PAGO_VENTA
+	PRINT('Procedure GUISO_DE_LENTEJAS.MIGRAR_PAGO_VENTA eliminado')
+END
+
 -----------------------------------------------------------------------------------------------------
 /*BORRADO DE ESQUEMA*/
 
