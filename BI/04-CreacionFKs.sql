@@ -248,3 +248,4 @@ BEGIN
 	PRINT('Foreign key de FECHA_VENCIMIENTO de la tabla GUISO_DE_LENTEJAS.BI_Hecho_Pago_Alquiler agregada')
 END
 GO
+
