@@ -1,139 +1,235 @@
---Borrados de FKs tabla hecho operacion
+--Borrado de FKs tabla hecho venta
 IF EXISTS (SELECT * 
     		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
-               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Operacion_Tiempo')
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Venta_Tiempo')
 BEGIN
-	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Operacion_Tiempo
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Venta_Tiempo
 END
 GO
 
 IF EXISTS (SELECT * 
     		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
-               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Operacion_Tipo_Inmueble')
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Venta_Tipo_Inmueble')
 BEGIN
-	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Operacion_Tipo_Inmueble
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Venta_Tipo_Inmueble
 END
 GO
 
 IF EXISTS (SELECT * 
     		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
-               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Operacion_Rango_M2')
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Venta_Rango_M2')
 BEGIN
-	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Operacion_Rango_M2
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Venta_Rango_M2
 END
 GO
 
 IF EXISTS (SELECT * 
     		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
-               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Operacion_Ubicacion')
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Venta_Ubicacion')
 BEGIN
-	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Operacion_Ubicacion
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Venta_Ubicacion
 END
 GO
 
 IF EXISTS (SELECT * 
     		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
-               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Operacion_Tipo_Operacion')
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Venta_Rango_Etario_Agente')
 BEGIN
-	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Operacion_Tipo_Operacion
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Venta_Rango_Etario_Agente
 END
 GO
 
 IF EXISTS (SELECT * 
     		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
-               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Operacion_Rango_Etario')
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Venta_Sucursal')
 BEGIN
-	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Operacion_Rango_Etario
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Venta_Sucursal
 END
 GO
 
 IF EXISTS (SELECT * 
     		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
-               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Operacion_Sucursal')
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Venta_Ambientes')
 BEGIN
-	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Operacion_Sucursal
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Venta_Ambientes
 END
 GO
 
 IF EXISTS (SELECT * 
     		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
-               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Operacion_Ambientes')
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Venta_Tipo_Moneda')
 BEGIN
-	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Operacion_Ambientes
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Venta_Tipo_Moneda
+END
+GO
+
+--Borrado de FKs tabla hecho alquiler
+IF EXISTS (SELECT * 
+    		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Alquiler_Tiempo')
+BEGIN
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Alquiler_Tiempo
 END
 GO
 
 IF EXISTS (SELECT * 
     		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
-               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Operacion_Tipo_Moneda')
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Alquiler_Tipo_Inmueble')
 BEGIN
-	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Operacion_Tipo_Moneda
-END
-GO
-
---Borrados de FKs tabla hecho anuncio
-IF EXISTS (SELECT * 
-    		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
-               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Operacion_Tiempo')
-BEGIN
-	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Anuncio DROP CONSTRAINT FK_BI_Hecho_Operacion_Tiempo
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Alquiler_Tipo_Inmueble
 END
 GO
 
 IF EXISTS (SELECT * 
     		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
-               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Operacion_Tipo_Inmueble')
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Alquiler_Rango_M2')
 BEGIN
-	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Anuncio DROP CONSTRAINT FK_BI_Hecho_Operacion_Tipo_Inmueble
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Alquiler_Rango_M2
 END
 GO
 
 IF EXISTS (SELECT * 
     		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
-               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Operacion_Rango_M2')
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Alquiler_Ubicacion')
 BEGIN
-	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Anuncio DROP CONSTRAINT FK_BI_Hecho_Operacion_Rango_M2
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Alquiler_Ubicacion
 END
 GO
 
 IF EXISTS (SELECT * 
     		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
-               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Operacion_Tipo_Moneda')
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Alquiler_Rango_Etario_Agente')
 BEGIN
-	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Anuncio DROP CONSTRAINT FK_BI_Hecho_Operacion_Tipo_Moneda
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Alquiler_Rango_Etario_Agente
 END
 GO
 
 IF EXISTS (SELECT * 
     		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
-               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Operacion_Ubicacion')
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Alquiler_Rango_Etario_Inquilino')
 BEGIN
-	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Anuncio DROP CONSTRAINT FK_BI_Hecho_Operacion_Ubicacion
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Alquiler_Rango_Etario_Inquilino
 END
 GO
 
 IF EXISTS (SELECT * 
     		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
-               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Operacion_Tipo_Operacion')
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Alquiler_Sucursal')
 BEGIN
-	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Anuncio DROP CONSTRAINT FK_BI_Hecho_Operacion_Tipo_Operacion
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Alquiler_Sucursal
 END
 GO
 
 IF EXISTS (SELECT * 
     		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
-               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Operacion_Ambientes')
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Alquiler_Ambientes')
 BEGIN
-	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Anuncio DROP CONSTRAINT FK_BI_Hecho_Operacion_Ambientes
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Alquiler_Ambientes
+END
+GO
+
+IF EXISTS (SELECT * 
+    		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Alquiler_Tipo_Moneda')
+BEGIN
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion DROP CONSTRAINT FK_BI_Hecho_Alquiler_Tipo_Moneda
+END
+GO
+
+--Borrado de FKs tabla hecho anuncio
+IF EXISTS (SELECT * 
+    		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Anuncio_Tiempo_Inicio')
+BEGIN
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Anuncio DROP CONSTRAINT FK_BI_Hecho_Anuncio_Tiempo_Inicio
+END
+GO
+
+IF EXISTS (SELECT * 
+    		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Anuncio_Tiempo_Fin')
+BEGIN
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Anuncio DROP CONSTRAINT FK_BI_Hecho_Anuncio_Tiempo_Fin
+END
+GO
+
+IF EXISTS (SELECT * 
+    		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Anuncio_Tipo_Inmueble')
+BEGIN
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Anuncio DROP CONSTRAINT FK_BI_Hecho_Anuncio_Tipo_Inmueble
+END
+GO
+
+IF EXISTS (SELECT * 
+    		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Anuncio_Rango_M2')
+BEGIN
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Anuncio DROP CONSTRAINT FK_BI_Hecho_Anuncio_Rango_M2
+END
+GO
+
+IF EXISTS (SELECT * 
+    		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Anuncio_Tipo_Moneda')
+BEGIN
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Anuncio DROP CONSTRAINT FK_BI_Hecho_Anuncio_Tipo_Moneda
+END
+GO
+
+IF EXISTS (SELECT * 
+    		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Anuncio_Ubicacion')
+BEGIN
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Anuncio DROP CONSTRAINT FK_BI_Hecho_Anuncio_Ubicacion
+END
+GO
+
+IF EXISTS (SELECT * 
+    		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Anuncio_Tipo_Operacion')
+BEGIN
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Anuncio DROP CONSTRAINT FK_BI_Hecho_Anuncio_Tipo_Operacion
+END
+GO
+
+IF EXISTS (SELECT * 
+    		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Anuncio_Ambientes')
+BEGIN
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Anuncio DROP CONSTRAINT FK_BI_Hecho_Anuncio_Ambientes
+END
+GO
+
+--Borrado de FKs tabla hecho pago_alquiler
+IF EXISTS (SELECT * 
+    		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Pago_Alquier_Fecha_Pago')
+BEGIN
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Anuncio DROP CONSTRAINT FK_BI_Hecho_Pago_Alquier_Fecha_Pago
+END
+GO
+
+IF EXISTS (SELECT * 
+    		   FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS 
+               WHERE CONSTRAINT_NAME ='FK_BI_Hecho_Pago_Alquier_Fecha_Vencimiento')
+BEGIN
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Anuncio DROP CONSTRAINT FK_BI_Hecho_Pago_Alquier_Fecha_Vencimiento
 END
 GO
 
 --Borrado de tablas de hechos
 
-IF OBJECT_ID('GUISO_DE_LENTEJAS.BI_Hecho_Operacion', 'U') IS NOT NULL
+IF OBJECT_ID('GUISO_DE_LENTEJAS.BI_Hecho_Venta', 'U') IS NOT NULL
 BEGIN
-	DROP TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion
-	PRINT('Tabla GUISO_DE_LENTEJAS.BI_Hecho_Operacion eliminada')
+	DROP TABLE GUISO_DE_LENTEJAS.BI_Hecho_Venta
+	PRINT('Tabla GUISO_DE_LENTEJAS.BI_Hecho_Venta eliminada')
+END
+
+IF OBJECT_ID('GUISO_DE_LENTEJAS.BI_Hecho_Alquiler', 'U') IS NOT NULL
+BEGIN
+	DROP TABLE GUISO_DE_LENTEJAS.BI_Hecho_Alquiler
+	PRINT('Tabla GUISO_DE_LENTEJAS.BI_Hecho_Alquiler eliminada')
 END
 
 IF OBJECT_ID('GUISO_DE_LENTEJAS.BI_Hecho_Anuncio', 'U') IS NOT NULL
@@ -142,3 +238,8 @@ BEGIN
 	PRINT('Tabla GUISO_DE_LENTEJAS.BI_Hecho_Anuncio eliminada')
 END
 
+IF OBJECT_ID('GUISO_DE_LENTEJAS.BI_Hecho_Pago_Alquiler', 'U') IS NOT NULL
+BEGIN
+	DROP TABLE GUISO_DE_LENTEJAS.BI_Hecho_Pago_Alquiler
+	PRINT('Tabla GUISO_DE_LENTEJAS.BI_Hecho_Pago_Alquiler eliminada')
+END

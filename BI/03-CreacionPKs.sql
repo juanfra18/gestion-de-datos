@@ -1,11 +1,22 @@
---PK tabla hecho operacion
+--PK tabla hecho venta
 IF NOT EXISTS (SELECT * 
     		   FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
-               WHERE CONSTRAINT_NAME ='PK_BI_Hecho_Operacion')
+               WHERE CONSTRAINT_NAME ='PK_BI_Hecho_Venta')
 BEGIN
-	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Operacion
-	ADD CONSTRAINT PK_BI_Hecho_Operacion PRIMARY KEY (OPERACION_CODIGO)
-	PRINT('Primary key de la tabla GUISO_DE_LENTEJAS.BI_Hecho_Operacion agregada')
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Venta
+	ADD CONSTRAINT PK_BI_Hecho_Venta PRIMARY KEY (VENTA_CODIGO)
+	PRINT('Primary key de la tabla GUISO_DE_LENTEJAS.BI_Hecho_Venta agregada')
+END
+GO
+
+--PK tabla hecho alquiler
+IF NOT EXISTS (SELECT * 
+    		   FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
+               WHERE CONSTRAINT_NAME ='PK_BI_Hecho_Alquiler')
+BEGIN
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Alquiler
+	ADD CONSTRAINT PK_BI_Hecho_Alquiler PRIMARY KEY (ALQUILER_CODIGO)
+	PRINT('Primary key de la tabla GUISO_DE_LENTEJAS.BI_Hecho_Alquiler agregada')
 END
 GO
 
@@ -17,5 +28,16 @@ BEGIN
 	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Anuncio
 	ADD CONSTRAINT PK_BI_Hecho_Anuncio PRIMARY KEY (ANUNCIO_ID)
 	PRINT('Primary key de la tabla GUISO_DE_LENTEJAS.BI_Hecho_Anuncio agregada')
+END
+GO
+
+--PK tabla hecho pago_alquiler
+IF NOT EXISTS (SELECT * 
+    		   FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
+               WHERE CONSTRAINT_NAME ='PK_BI_Hecho_Pago_Alquiler')
+BEGIN
+	ALTER TABLE GUISO_DE_LENTEJAS.BI_Hecho_Pago_Alquiler
+	ADD CONSTRAINT PK_BI_Hecho_Pago_Alquiler PRIMARY KEY (PAGO_ALQUILER_CODIGO)
+	PRINT('Primary key de la tabla GUISO_DE_LENTEJAS.BI_Hecho_Pago_Alquiler agregada')
 END
 GO
