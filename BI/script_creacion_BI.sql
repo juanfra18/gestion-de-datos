@@ -402,6 +402,13 @@ IF EXISTS (select * from sys.objects where object_id = OBJECT_ID('GUISO_DE_LENTE
 	PRINT('Funcion GUISO_DE_LENTEJAS.rangoM2_fx eliminada')
 GO
 
+
+IF EXISTS (select * from sys.objects where object_id = OBJECT_ID('GUISO_DE_LENTEJAS.rangoM2_aNumero_fx') and type = 'FN')
+    DROP FUNCTION  GUISO_DE_LENTEJAS.rangoM2_aNumero_fx
+	PRINT('Funcion GUISO_DE_LENTEJAS.rangoM2_aNumero_fx eliminada')
+GO
+
+
 --Borrado de Vistas
 IF EXISTS (select * from sys.objects where object_id = OBJECT_ID('GUISO_DE_LENTEJAS.BI_DURACION_PROMEDIO_PUBLICACION_ANUNCIO') and type = 'V')
 	DROP VIEW GUISO_DE_LENTEJAS.BI_DURACION_PROMEDIO_PUBLICACION_ANUNCIO
@@ -422,6 +429,17 @@ IF EXISTS (select * from sys.objects where object_id = OBJECT_ID('GUISO_DE_LENTE
 	DROP VIEW GUISO_DE_LENTEJAS.BI_PORCENTAJE_INCUMPLIMIENTO_PAGO_ALQUILER
 	PRINT('Vista GUISO_DE_LENTEJAS.BI_PORCENTAJE_INCUMPLIMIENTO_PAGO_ALQUILER eliminada')
 GO
+
+IF EXISTS (select * from sys.objects where object_id = OBJECT_ID('GUISO_DE_LENTEJAS.BI_PROMEDIO_M2_VENTA') and type = 'V')
+	DROP VIEW GUISO_DE_LENTEJAS.BI_PROMEDIO_M2_VENTA
+	PRINT('Vista GUISO_DE_LENTEJAS.BI_PROMEDIO_M2_VENTA eliminada')
+GO
+
+IF EXISTS (select * from sys.objects where object_id = OBJECT_ID('GUISO_DE_LENTEJAS.BI_PROMEDIO_COMISION_OPERACION_CUATRIMESTRE') and type = 'V')
+	DROP VIEW GUISO_DE_LENTEJAS.BI_PROMEDIO_COMISION_OPERACION_CUATRIMESTRE
+	PRINT('Vista GUISO_DE_LENTEJAS.BI_PROMEDIO_COMISION_OPERACION_CUATRIMESTRE eliminada')
+GO
+
 
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id= OBJECT_ID(N'[GUISO_DE_LENTEJAS].BI_Hecho_Venta') AND type = 'U')
 BEGIN
@@ -1074,6 +1092,70 @@ CREATE VIEW GUISO_DE_LENTEJAS.BI_PORCENTAJE_INCUMPLIMIENTO_PAGO_ALQUILER AS
 	GROUP BY  tv.TIEMPO_ANIO  , tv.TIEMPO_MES 
 GO
 
+--Vista 5: Porcentaje promedio de incremento del valor de los alquileres
+/*Porcentaje promedio de incremento del valor de los alquileres para los
+contratos en curso por mes/año. Se calcula tomando en cuenta el último pago
+con respecto al del mes en curso, únicamente de aquellos alquileres que hayan
+tenido aumento y están activos.*/
+
+
+--Vista 6: Precio promedio de m2
+/*Precio promedio de m2 de la venta de inmuebles según el tipo de inmueble y
+la localidad para cada cuatrimestre/año. Se calcula en función de las ventas
+concretadas.*/
+
+CREATE FUNCTION GUISO_DE_LENTEJAS.rangoM2_aNumero_fx(@rango nvarchar(15))
+RETURNS numeric(18,2)
+AS
+BEGIN
+    DECLARE @sup numeric(18,2)
+
+    SELECT @sup = CASE 
+        WHEN @rango = '<35' THEN 35
+        WHEN @rango = '35-55' THEN 45
+        WHEN @rango = '55-75' THEN 65
+        WHEN @rango = '75-100' THEN 87.5
+        ELSE 100
+    END
+
+    RETURN @sup
+END
+GO
+
+CREATE VIEW GUISO_DE_LENTEJAS.BI_PROMEDIO_M2_VENTA AS
+	SELECT bt.TIEMPO_ANIO, bt.TIEMPO_CUATRIMESTRE, bti.TIPO_INMUEBLE_DESCRIPCION, bu.UBICACION_LOCALIDAD, AVG(bhv.VENTA_PRECIO/GUISO_DE_LENTEJAS.rangoM2_aNumero_fx(brm.RANGO_M2_DESCRIPCION)) AS Promedio
+	FROM GUISO_DE_LENTEJAS.BI_Hecho_Venta bhv 
+	INNER JOIN GUISO_DE_LENTEJAS.BI_Tipo_Inmueble bti ON bti.TIPO_INMUEBLE_ID = bhv.VENTA_TIPO_INMUEBLE
+	INNER JOIN GUISO_DE_LENTEJAS.BI_Ubicacion bu ON bu.UBICACION_CODIGO = bhv.VENTA_UBICACION
+	INNER JOIN GUISO_DE_LENTEJAS.BI_Tiempo bt ON bt.TIEMPO_CODIGO = bhv.VENTA_TIEMPO 
+	INNER JOIN GUISO_DE_LENTEJAS.BI_Rango_M2 brm ON brm.RANGO_M2_CODIGO = bhv.VENTA_RANGO_M2
+	GROUP BY bt.TIEMPO_ANIO, bt.TIEMPO_CUATRIMESTRE, bti.TIPO_INMUEBLE_ID, bti.TIPO_INMUEBLE_DESCRIPCION, bu.UBICACION_LOCALIDAD
+GO
+
+--Vista 7:
+/*Valor promedio de la comisión según el tipo de operación (alquiler, venta, etc)
+y sucursal para cada cuatrimestre/año. Se calcula en función de los alquileres y
+ventas concretadas dentro del periodo.*/
+CREATE VIEW GUISO_DE_LENTEJAS.BI_PROMEDIO_COMISION_OPERACION_CUATRIMESTRE AS
+	SELECT bt.TIEMPO_ANIO , bt.TIEMPO_CUATRIMESTRE , bs.SUCURSAL_NOMBRE, AVG(bha.ALQUILER_COMISION) AS PromedioComision, 'Alquiler' AS TipoOperacion
+	FROM GUISO_DE_LENTEJAS.BI_Hecho_Alquiler bha
+	INNER JOIN GUISO_DE_LENTEJAS.BI_Tiempo bt ON bt.TIEMPO_CODIGO = bha.ALQUILER_TIEMPO
+	INNER JOIN GUISO_DE_LENTEJAS.BI_Sucursal bs ON bs.SUCURSAL_CODIGO = bha.ALQUILER_SUCURSAL
+	GROUP BY bt.TIEMPO_ANIO , bt.TIEMPO_CUATRIMESTRE , bs.SUCURSAL_CODIGO , bs.SUCURSAL_NOMBRE 
+	UNION ALL
+	SELECT bt.TIEMPO_ANIO , bt.TIEMPO_CUATRIMESTRE , bs.SUCURSAL_NOMBRE, AVG(bhv.VENTA_COMISION) AS PromedioComision, 'Venta' AS TipoOperacion
+	FROM GUISO_DE_LENTEJAS.BI_Hecho_Venta bhv
+	INNER JOIN GUISO_DE_LENTEJAS.BI_Tiempo bt ON bt.TIEMPO_CODIGO = bhv.VENTA_TIEMPO 
+	INNER JOIN GUISO_DE_LENTEJAS.BI_Sucursal bs ON bs.SUCURSAL_CODIGO = bhv.VENTA_SUCURSAL
+	GROUP BY bt.TIEMPO_ANIO , bt.TIEMPO_CUATRIMESTRE , bs.SUCURSAL_CODIGO , bs.SUCURSAL_NOMBRE 
+GO
+
+
+
+
+
+
+
 CREATE PROCEDURE GUISO_DE_LENTEJAS.BI_MIGRAR_DIMENSION_TIEMPO
 AS
     BEGIN
@@ -1264,7 +1346,7 @@ BEGIN
 											VENTA_AMBIENTES,
 											VENTA_TIPO_MONEDA,
 											VENTA_COMISION,
-											VENTA_PRECIO)
+                                            VENTA_PRECIO)
     SELECT 
 	    (SELECT t.TIEMPO_CODIGO FROM GUISO_DE_LENTEJAS.BI_Tiempo t WHERE t.TIEMPO_ANIO = YEAR(v.VENTA_FECHA) AND t.TIEMPO_MES = MONTH(v.VENTA_FECHA) AND t.TIEMPO_DIA = DAY(v.VENTA_FECHA)),
 	    (SELECT tipi.TIPO_INMUEBLE_ID FROM GUISO_DE_LENTEJAS.BI_Tipo_Inmueble tipi WHERE tipi.TIPO_INMUEBLE_DESCRIPCION = ti.TIPO_INMUEBLE_DESCRIPCION),
