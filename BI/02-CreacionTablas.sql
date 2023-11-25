@@ -10,7 +10,8 @@ BEGIN
         VENTA_SUCURSAL numeric(18,0) NOT NULL,
         VENTA_AMBIENTES numeric(18,0) NOT NULL,
         VENTA_TIPO_MONEDA numeric(18,0) NOT NULL,
-        VENTA_COMISION numeric(18,2) NOT NULL 
+        VENTA_COMISION numeric(18,2) NOT NULL,
+        VENTA_PRECIO numeric(18,2) NOT NULL 
 	)
 	PRINT('Tabla GUISO_DE_LENTEJAS.BI_Hecho_Venta creada')
 END

@@ -81,3 +81,24 @@ CREATE VIEW GUISO_DE_LENTEJAS.BI_PORCENTAJE_INCUMPLIMIENTO_PAGO_ALQUILER AS
 	GROUP BY  tv.TIEMPO_ANIO  , tv.TIEMPO_MES 
 GO
 
+--Vista 5: Porcentaje promedio de incremento del valor de los alquileres
+/*Porcentaje promedio de incremento del valor de los alquileres para los
+contratos en curso por mes/año. Se calcula tomando en cuenta el último pago
+con respecto al del mes en curso, únicamente de aquellos alquileres que hayan
+tenido aumento y están activos.*/
+
+
+--Vista 6: Precio promedio de m2
+/*Precio promedio de m2 de la venta de inmuebles según el tipo de inmueble y
+la localidad para cada cuatrimestre/año. Se calcula en función de las ventas
+concretadas.*/
+
+
+
+
+
+
+
+
+
+
