@@ -294,3 +294,4 @@ BEGIN
 	PRINT('Foreign key de INQUILINO de la tabla GUISO_DE_LENTEJAS.ALQUILER agregada')
 END
 GO
+
