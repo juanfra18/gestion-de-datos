@@ -32,6 +32,7 @@ BEGIN
         ALQUILER_AMBIENTES numeric(18,0) NOT NULL,
         ALQUILER_TIPO_MONEDA numeric(18,0) NOT NULL,
         ALQUILER_COMISION numeric(18,2) NOT NULL,
+        ALQUILER_DEPOSITO numeric(18,2) NOT NULL,
         ALQUILER_CANT_ALQUILERES_AGRUPADOS numeric(18,0) NOT NULL 
 	)
 	PRINT('Tabla GUISO_DE_LENTEJAS.BI_Hecho_Alquiler creada')
@@ -65,6 +66,7 @@ BEGIN
         PAGO_ALQUILER_CODIGO numeric(18,0) NOT NULL IDENTITY(1,1),
         PAGO_FECHA_PAGO numeric(18,0) NOT NULL,
         PAGO_FECHA_VENCIMIENTO numeric(18,0) NOT NULL,
+        PAGO_AUMENTO numeric(18,0) NOT NULL,
         PAGO_CANT_PAGOS_AGRUPADOS numeric(18,0) NOT NULL
 	)
 	PRINT('Tabla GUISO_DE_LENTEJAS.BI_Hecho_Pago_Alquiler creada')
