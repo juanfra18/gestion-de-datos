@@ -11,7 +11,8 @@ BEGIN
         VENTA_AMBIENTES numeric(18,0) NOT NULL,
         VENTA_TIPO_MONEDA numeric(18,0) NOT NULL,
         VENTA_COMISION numeric(18,2) NOT NULL,
-        VENTA_PRECIO numeric(18,2) NOT NULL 
+        VENTA_PRECIO numeric(18,2) NOT NULL,
+        VENTA_CANT_VENTAS_AGRUPADAS numeric(18,0) NOT NULL
 	)
 	PRINT('Tabla GUISO_DE_LENTEJAS.BI_Hecho_Venta creada')
 END
@@ -30,7 +31,8 @@ BEGIN
         ALQUILER_SUCURSAL numeric(18,0) NOT NULL,
         ALQUILER_AMBIENTES numeric(18,0) NOT NULL,
         ALQUILER_TIPO_MONEDA numeric(18,0) NOT NULL,
-        ALQUILER_COMISION numeric(18,2) NOT NULL 
+        ALQUILER_COMISION numeric(18,2) NOT NULL,
+        ALQUILER_CANT_ALQUILERES_AGRUPADOS numeric(18,0) NOT NULL 
 	)
 	PRINT('Tabla GUISO_DE_LENTEJAS.BI_Hecho_Alquiler creada')
 END
@@ -49,7 +51,8 @@ BEGIN
         ANUNCIO_UBICACION numeric(18,0) NOT NULL,
         ANUNCIO_TIPO_OPERACION numeric(18,0) NOT NULL,
         ANUNCIO_AMBIENTES numeric(18,0) NOT NULL,
-        ANUNCIO_PRECIO numeric(18,2) NOT NULL
+        ANUNCIO_PRECIO numeric(18,2) NOT NULL,
+        ANUNCIO_CANT_ANUNCIOS_AGRUPADOS numeric(18,0) NOT NULL
 	)
 	PRINT('Tabla GUISO_DE_LENTEJAS.BI_Hecho_Anuncio creada')
 END
@@ -61,7 +64,8 @@ BEGIN
 	CREATE TABLE GUISO_DE_LENTEJAS.BI_Hecho_Pago_Alquiler (
         PAGO_ALQUILER_CODIGO numeric(18,0) NOT NULL IDENTITY(1,1),
         PAGO_FECHA_PAGO numeric(18,0) NOT NULL,
-        PAGO_FECHA_VENCIMIENTO numeric(18,0) NOT NULL
+        PAGO_FECHA_VENCIMIENTO numeric(18,0) NOT NULL,
+        PAGO_CANT_PAGOS_AGRUPADOS numeric(18,0) NOT NULL
 	)
 	PRINT('Tabla GUISO_DE_LENTEJAS.BI_Hecho_Pago_Alquiler creada')
 END
